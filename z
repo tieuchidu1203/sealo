@@ -5098,7 +5098,6 @@ pcall(function()
 end)
 for k,v in pairs(game:GetService("Workspace")["Invisible Walls"]:GetChildren()) do v:Destroy() end
 for k,v in pairs(game:GetService("Workspace").Territories:GetChildren()) do v:Destroy() end
-for k,v in pairs(game:GetService("Workspace").MonsterBarriers:GetChildren()) do v:Destroy() end
 
 for k,v in pairs(game:GetService("Workspace").Map.OuterInvisWalls:GetChildren()) do v:Destroy() end
 local TvkStatCache = game:GetService("ReplicatedStorage").Events.RetrievePlayerStats:InvokeServer()
@@ -5991,7 +5990,6 @@ function CollectTokenThanhTuoi(Field,TokenList)
 end
 
 function GetTunnel()
-    for _, v in ipairs(game.Workspace.Monsters:GetChildren()) do
         if string.match(v.Name, "Tunnel") then
             if v:FindFirstChild("Config") then
                 if v:FindFirstChild("Hunter") then
@@ -6005,7 +6003,6 @@ function GetTunnel()
 end
 
 function GetKing()
-    for _, v in ipairs(game.Workspace.Monsters:GetChildren()) do
         if v.Name=="King Beetle (Lvl 7)" then
             if v:FindFirstChild("Config") then
                 if v:FindFirstChild("Hunter") then
@@ -6023,7 +6020,6 @@ local ccsnail = false
 
 
 function GetMobIns(Mob)
-    return game.Workspace.MonsterSpawners:FindFirstChild(Mob)
 end
 function GetAttach(Mob)
     local Att = Mob:FindFirstChild("Attachment")
@@ -7077,7 +7073,6 @@ function CheckPollenValid(pollen)
     return true
 end
 function GetComandoMob()
-    for k, v in pairs(game.Workspace.Monsters:GetChildren()) do
         if string.match(v.Name, "Commando") then
             if v:FindFirstChild("Target")
             and v:FindFirstChild("Humanoid")
@@ -7705,7 +7700,6 @@ function GetValidAntPos()
 
 end
 function CheckNear(pos,mob) 
-    for k,v in pairs(game.Workspace.Monsters:GetChildren()) do 
         if string.match(v.Name,mob) then 
             if v:FindFirstChild("Torso") or v:FindFirstChild("HumanoidRootPart") then 
                 if ((v:FindFirstChild("Torso") or v:FindFirstChild("HumanoidRootPart")).Position-pos.p).magnitude<20 then 
@@ -11926,8 +11920,7 @@ end
 -- UI LIB --
 SpawnTable["Stickbug"] = function() 
     while wait(1) do
-        if Settings.StickBug and CheckFarm("Stick") then 
-            for k,v in pairs(game.Workspace.Monsters:GetChildren()) do 
+        if Settings.StickBug and CheckFarm("Stick") then  
                 if string.match(v.Name,"Stick Bug") and CheckFarm("Stick") then 
                     if Settings.StickBug and v.Parent and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health>0 then 
                         StopFarmList["Stick"]=true
@@ -12467,7 +12460,6 @@ SpawnTable["Mob"] = function()
                 end
             else
                 if CheckFarm("Kill") then
-                    for k,v in pairs(game.Workspace.Monsters:GetChildren()) do 
                         if string.match(v.Name,"Vicious") then 
                             if v:FindFirstChild("Level") then 
                                 if v.Level.Value>=Settings.ViciousMin and v.Level.Value<=Settings.ViciousMax then 
@@ -12512,7 +12504,6 @@ SpawnTable["Mob"] = function()
                     end
                 end
             end
-            for i, v in pairs(game.Workspace.Monsters:GetChildren()) do
                 if (string.find(v.Name, "Windy") or v.Name == "KillingWindyBee") and v:FindFirstChild("HumanoidRootPart") and Settings.KillWindy and CheckFarm("Kill") then
                     local nrf = GetNerestFieldByObject(v.HumanoidRootPart)
                     if CheckFieldReq(nrf) then 
@@ -12661,7 +12652,6 @@ SpawnTable["Mob"] = function()
             Valid = true
         end
         if Settings.AutoMondo and CheckFarm("Kill") then
-            for i, v in pairs(game.Workspace.Monsters:GetChildren()) do
                 if string.find(v.Name, "Mondo Chick") then
                     v.Name = "KillingMondo Chick"
                     Valid = false
@@ -12674,7 +12664,6 @@ SpawnTable["Mob"] = function()
                             tpT(CFrame.new(v.Head.Position.x + 25, 176.4, v.Head.Position.z + 25), 100)
                         end
                         CollectAttackTokens(25)
-                    until not game.workspace.Monsters:FindFirstChild("KillingMondo Chick")
                     or not Settings.AutoMondo or not CheckFarm("Kill")
                     Killing = false
                     SetEN("Noclip", "Kill", false)
@@ -12812,7 +12801,6 @@ SpawnTable["Mob"] = function()
             
         end
         if (Settings.SnowBear) and CheckFarm("Kill") then 
-            for k,v in pairs(game.Workspace.Monsters:GetChildren()) do 
                 if string.match(v.Name:lower(),"snowbear") then 
                     if v:FindFirstChild("HumanoidRootPart") then 
                         repeat wait()
@@ -13331,8 +13319,7 @@ SpawnTable["Farm"] = function()
                     end
                 end
                 if Settings.AvoidMob then 
-                    local function IsMob() 
-                        for k,v in ipairs(game:GetService("Workspace").Monsters:GetChildren()) do 
+                    local function IsMob()  
                             if v:FindFirstChild("Head") and not string.match(v.Name,"Vici") and not string.match(v.Name,"Windy") and not string.match(v.Name,"Mondo") then 
                                 if (plr.Character:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Target") and tostring(v.Target.Value)==plr.Name) or v:FindFirstChild("Tvk") then 
                                     if (plr.Character.HumanoidRootPart.Position-v.Head.Position).magnitude<25 then 
